@@ -1,0 +1,221 @@
+.navigation {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.navigation__authorization {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+}
+
+.navigation__authorization-link {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-decoration: none;
+  color: #ffffff;
+  margin-right: 30px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.navigation__authorization-link:hover {
+  opacity: 0.7;
+}
+
+.navigation__authorization-link_active {
+  margin: 0;
+  color: #000;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 8px 20px;
+  font-style: normal;
+  background-color: #3DDC84;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.navigation__authorization-link_active:hover {
+  transition: opacity 0.5s linear;
+  opacity: 0.8;
+}
+
+.navigation__movies {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+}
+
+.navigation__movies-link {
+  text-decoration: none;
+  margin-right: 19px;
+  color: #fff;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.navigation__movies-link_active {
+  font-weight: 500;
+}
+
+.navigation__movies-link:hover {
+  opacity: 0.5;
+  transition: opacity 0.5s linear;
+}
+
+.navigation__movies-link:last-of-type {
+  margin-right: 0px;
+}
+
+.navigation__button_type_account {
+  background: #202020;
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  padding-top: 7px;
+  padding-bottom: 10px;
+  margin-right: 0;
+  padding-right: 0;
+  padding-left: 50px;
+}
+
+.navigation__button_type_account:hover {
+  opacity: 0.8;
+}
+
+.navigation__account {
+  width: 150px;
+  height: 32px;
+  padding-left: 292px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navigation__profile-icon {
+  border-radius: 4px;
+  padding: 8px 7.2px 8px 7.2px;
+  color: inherit;
+  background-color: #313131;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  margin: 0 1px 4px 17px;
+}
+
+.navigation__button_type_account:hover {
+  opacity: 0.5;
+  transition: opacity 0.5s linear;
+}
+
+.navigation__button_type_burger-menu:hover {
+  opacity: 0.5;
+  transition: opacity 0.5s linear;
+}
+
+.navigation__button_type_burger-menu {
+  display: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__movies-link,
+  .navigation__button_type_account,
+  .navigation__profile-icon {
+    display: none;
+  }
+
+  .navigation__button_type_burger-menu {
+    display: block;
+    width: 44px;
+    height: 44px;
+    border: none;
+    cursor: pointer;
+    background: #202020;
+    border-radius: 0;
+    padding: 8px 11px;
+    background-image: url("../../images/navigation-burger-icon768.svg");
+    transition: 0.3s ease;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .navigation__button_type_burger {
+    width: 40px;
+    height: 43px;
+    background-size: contain;
+  }
+
+  .navigation__authorization-link {
+    font-size: 10px;
+    margin-right: 14px;
+  }
+
+  .navigation__authorization-link_active {
+    font-size: 10px;
+    padding: 5px 12px;
+    margin-right: 0;
+  }
+
+  .navigation__account {
+    width: 0px;
+    height: 32px;
+    padding-left: 240px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .navigation__button_type_burger-menu {
+    width: 40px;
+    height: 43px;
+    background-size: contain;
+    background-image: url("../../images/burger-menu-icon320.svg");
+  }
+
+  .navigation__authorization-link {
+    font-size: 10px;
+    margin-right: 14px;
+  }
+
+  .navigation__authorization-link_active {
+    font-size: 10px;
+    padding: 5px 12px;
+    margin-right: 0;
+  }
+
+  .navigation__account {
+    display: none;
+  }
+
+  .navigation__movies {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+  }
+
+  .navigation {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
+}
