@@ -6,7 +6,7 @@ import FilterCheckbox from '../Checkbox/Checkbox';
 const SearchForm = () => {
   return (
     <section className='searchform'>
-      <div className='searchform__input-container'>
+      <form className='searchform__input-container'>
         <input
           className='searchform__input'
           placeholder='Фильм'
@@ -15,7 +15,7 @@ const SearchForm = () => {
         </input>
         <button className='searchform__button-find' type='submit'>
         </button>
-      </div>
+      </form>
       <FilterCheckbox />
     </section>
   );

@@ -5,6 +5,7 @@
   list-style: none;
   margin: 0 auto;
   padding: 0;
+  background-color: #272727;
 }
 
 .nav-tab__item {
@@ -14,6 +15,7 @@
   width: 96px;
   height: 36px;
   cursor: pointer;
+  background-color: #303030;
 }
 
 .nav-tab__item-link {

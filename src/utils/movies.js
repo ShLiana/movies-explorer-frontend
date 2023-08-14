@@ -37,7 +37,7 @@ const movies = [
     duration: "1ч 42м",
     _id: 5,
   },
-  {
+  /*{
     image: sixMovie,
     title: "Книготорговцы",
     duration: "1ч 42м",
@@ -48,7 +48,7 @@ const movies = [
     title: "Когда я думаю о Германии ночью",
     duration: "1ч 42м",
     _id: 7,
-  },
+  },*/
 ];
 
 export default movies;

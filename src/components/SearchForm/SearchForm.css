@@ -1,6 +1,6 @@
 .searchform {
   position: relative;
-  padding: 48px 0 30px;
+  padding: 45px 0 26px;
   margin: 0 auto;
   width: 100%;
 }
@@ -11,12 +11,10 @@
   display: flex;
   justify-content: space-between;
   max-width: 1140px;
-  max-height: 38px;
+  align-items: center;
 }
 
 .searchform__input {
-  padding-top: 16px;
-  padding-bottom: 14px;
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
@@ -24,7 +22,11 @@
   border: none;
   background-color: #2f2f2f;
   color: #8b8b8b;
-  margin-left: 20px;
+  margin-left: 22px;
+  outline: none;
+}
+
+.seachform__input:focus {
   outline: none;
 }
 
@@ -36,7 +38,8 @@
   cursor: pointer;
   background-image: url(../../images/find-icon.svg);
   align-items: center;
-  margin: auto 6px auto 0;
+  /*margin: auto 6px auto 0;*/
+  margin: 6px 6px 6px;
 }
 
 .searchform__button-find:hover {
@@ -46,11 +49,7 @@
 
 @media screen and (max-width: 768px) {
   .searchform {
-    padding-top: 83px;
-  }
-
-  .searchform__input {
-    padding-top: 13px;
+    padding: 79px 0 30px;
   }
 
   .searchform__input {
@@ -83,7 +82,7 @@
     height: 148px;
     padding-top: 81px;
     margin: 0 auto;
-    padding-bottom: 56px;
+    padding-bottom: 57px;
   }
 
   .searchform__input {

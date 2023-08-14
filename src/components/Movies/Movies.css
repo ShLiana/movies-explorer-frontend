@@ -9,7 +9,6 @@
 
 .movies__more-button {
   box-sizing: border-box;
-  margin: 60px 410px 80px;
   color: #fff;
   text-align: center;
   font-size: 12px;
@@ -21,9 +20,10 @@
   border: none;
   cursor: pointer;
   padding: 11px 0 9px;
-  max-width: 320px;
+  width: 320px;
   max-height: 36px;
   font-family: Inter;
+  margin: 60px auto 80px;
 }
 
 .movies__more-button:hover {
@@ -37,7 +37,7 @@
   }
 
   .movies__more-button {
-    margin: 51px 194px 82px;
+    margin: 51px auto 82px;
     padding: 10px 60px 9px;
   }
 }
@@ -48,8 +48,8 @@
   }
 
   .movies__more-button {
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 167px;
+    margin: 167px auto 0;
+    width: 240px;
+    height: 36px;
   }
 }

@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 31px 0 51px;
+  padding: 27px 0 53px;
   border-bottom: 1px solid #424242;
   margin: 0;
 }
@@ -61,14 +61,14 @@
   }
 
   .checkbox {
-    padding-top: 42px;
+    padding-top: 38px;
     padding-bottom: 51px;
   }
 }
 
 @media screen and (max-width: 430px) {
   .checkbox {
-    padding: 44px 0 43px;
+    padding: 37px 0 43px;
     border: 0px;
   }
 

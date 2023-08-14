@@ -24,7 +24,7 @@
   padding-top: 38px;
   padding-left: 0;
   padding-right: 0;
-  padding-bottom: 38px;
+  padding-bottom: 28px;
 }
 
 .authorization__text-hint {
@@ -78,7 +78,7 @@
 
   .authorization__title {
     align-self: center;
-    padding: 44px 0 79px;
+    padding: 44px 0 69px;
   }
 
   .authorization__text-hint {

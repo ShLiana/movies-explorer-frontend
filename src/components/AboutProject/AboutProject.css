@@ -64,7 +64,7 @@
 
 .about-project__progress-line {
   margin: 0;
-  background: #3ddc84;
+  background-color: #3ddc84;
   padding-right: 8px;
   padding-top: 9px;
   padding-bottom: 9px;
@@ -76,11 +76,12 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
 }
 
 .about-project__progress-line:last-of-type {
   color: #ffffff;
-  background: #202020;
+  background-color: #202020;
 }
 
 .about-project__progress-subtitle {
