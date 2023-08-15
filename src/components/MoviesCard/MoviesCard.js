@@ -13,7 +13,7 @@ function MoviesCard({ movie }) {
   }
 
   return (
-    <div className='movies-card'>
+    <li className='movies-card'>
       <div className='movies-card__info'>
         <h2 className='movies-card__title'>{movie.title}</h2>
         <p className='movies-card__duration'>{movie.duration}</p>
@@ -31,7 +31,7 @@ function MoviesCard({ movie }) {
         )}
       </div>
       <img className='movies-card__image' src={movie.image} alt={movie.title} />
-    </div>
+    </li>
   );
 }
 export default MoviesCard;

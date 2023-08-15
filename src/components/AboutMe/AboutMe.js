@@ -10,9 +10,9 @@ const AboutMe = () => {
       <div className='about-me__block'>
         <div className='about-me__info'>
           <h3 className='about-me__name'>Лиана</h3>
-          <p className='aboute-me__job'>Фронтенд-разработчик, 35 лет</p>
+          <p className='about-me__job'>Веб-разработчик, 35 лет</p>
           <p className='about-me__description'>
-            Я родилась и живу в городе Уфе. Я закончила
+            Я&nbsp;родилась и живу в городе&nbsp;Уфе. Я закончила
             факультет авиационного приборостроения ФГБОУ ВПО "УГАТУ" по двум
             направлениям - биомедицинские аппараты и системы и
             электроэнергетика. Сейчас работаю в больнице метрологом и в

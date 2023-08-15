@@ -26,8 +26,10 @@
   outline: none;
 }
 
-.seachform__input:focus {
-  outline: none;
+.searchform__input:focus {
+  outline: 1px solid #3ddc84;
+  border-radius: 10px;
+
 }
 
 .searchform__button-find {

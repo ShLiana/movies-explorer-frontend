@@ -64,24 +64,23 @@
 
 .about-project__progress-line {
   margin: 0;
-  background-color: #3ddc84;
+  background: #3ddc84;
   padding-right: 8px;
   padding-top: 9px;
   padding-bottom: 9px;
   padding-left: 0;
-  color: #000000;
+  color: #000;
   text-align: center;
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-
 }
 
 .about-project__progress-line:last-of-type {
-  color: #ffffff;
-  background-color: #202020;
+  color: #fff;
+  background: #303030;
 }
 
 .about-project__progress-subtitle {
@@ -123,7 +122,6 @@
   }
 
   .about-project__progress-subtitle {
-    font-family: "Suisse Intl";
     font-weight: 400;
     color: #a0a0a0;
   }
@@ -173,7 +171,6 @@
 
   .about-project__progress-subtitle {
     font-size: 11px;
-    font-family: "Suisse Intl";
     color: #a0a0a0;
     line-height: normal;
   }

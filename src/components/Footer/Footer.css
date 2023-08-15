@@ -98,3 +98,9 @@
     font-size: 12px;
   }
 }
+
+@media screen and (max-width: 555px) {
+  .footer {
+    padding-top: 159px;
+  }
+}

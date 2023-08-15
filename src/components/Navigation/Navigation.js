@@ -41,7 +41,7 @@ const Navigation = ({ isLoggedIn }) => {
             Сохранённые фильмы
           </NavLink>
           <NavLink className='navigation__account' to='/profile'>
-            <button className='navigation__button_type_account' type='button'>
+            <button className='navigation__account-button' type='button'>
               Аккаунт
             </button>
             <img
@@ -51,7 +51,7 @@ const Navigation = ({ isLoggedIn }) => {
             ></img>
           </NavLink>
           <button
-            className='navigation__button_type_burger-menu'
+            className='navigation__account-burger-menu-button'
             type='button'
             onClick={openBurgerMenuClicked}
           />

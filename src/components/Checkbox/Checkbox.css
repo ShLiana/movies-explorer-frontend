@@ -69,7 +69,6 @@
 @media screen and (max-width: 430px) {
   .checkbox {
     padding: 37px 0 43px;
-    border: 0px;
   }
 
   .checkbox__name {

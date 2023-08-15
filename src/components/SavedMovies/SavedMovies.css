@@ -19,3 +19,11 @@
     padding-right: 10px;
   }
 }
+
+@media screen and (max-width: 430px) {
+  .saved-movies {
+    width: 320px;
+    padding: 0;
+    margin: 0 auto;
+  }
+}

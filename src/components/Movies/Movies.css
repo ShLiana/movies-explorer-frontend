@@ -42,14 +42,35 @@
   }
 }
 
+@media screen and (max-width: 696px) {
+  .movies {
+    width: calc(100% - 60px);
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  }
+
+  .movies__more-button {
+    margin: 120px auto 82px;
+  }
+}
+
 @media screen and (max-width: 430px) {
   .movies {
     width: 320px;
   }
 
   .movies__more-button {
-    margin: 167px auto 0;
+    /*margin: 167px auto 0;*/
     width: 240px;
     height: 36px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  
+  .movies__more-button {
+    margin: 51px auto 0;
+  
   }
 }

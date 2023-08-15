@@ -79,7 +79,7 @@
   margin-right: 0px;
 }
 
-.navigation__button_type_account {
+.navigation__account-button {
   background: #202020;
   border: none;
   color: #ffffff;
@@ -97,7 +97,7 @@
   padding-left: 50px;
 }
 
-.navigation__button_type_account:hover {
+.navigation__account-button:hover {
   opacity: 0.8;
 }
 
@@ -120,29 +120,29 @@
   margin: 0 1px 4px 17px;
 }
 
-.navigation__button_type_account:hover {
+.navigation__account-button:hover {
   opacity: 0.5;
   transition: opacity 0.5s linear;
 }
 
-.navigation__button_type_burger-menu:hover {
+.navigation__account-burger-menu-button:hover {
   opacity: 0.5;
   transition: opacity 0.5s linear;
 }
 
-.navigation__button_type_burger-menu {
+.navigation__account-burger-menu-button {
   display: none;
   cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
   .navigation__movies-link,
-  .navigation__button_type_account,
+  .navigation__account-button,
   .navigation__profile-icon {
     display: none;
   }
 
-  .navigation__button_type_burger-menu {
+  .navigation__account-burger-menu-button {
     display: block;
     width: 44px;
     height: 44px;
@@ -157,7 +157,7 @@
 }
 
 @media screen and (max-width: 430px) {
-  .navigation__button_type_burger {
+  .navigation__account-burger-menu-button {
     width: 40px;
     height: 43px;
     background-size: contain;
@@ -184,7 +184,7 @@
 }
 
 @media screen and (max-width: 320px) {
-  .navigation__button_type_burger-menu {
+  .navigation__account-burger-menu-button {
     width: 40px;
     height: 43px;
     background-size: contain;
