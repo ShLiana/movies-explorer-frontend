@@ -1,0 +1,19 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 396px;
+  height: 345px;
+  margin: 0;
+}
+
+.form:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 430px) {
+  .form {
+    width: 260px;
+    height: 423px;
+    padding-bottom: 11px;
+  }
+}

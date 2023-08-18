@@ -1,0 +1,133 @@
+.technologies {
+  max-width: 1280px;
+  background: #272727;
+  box-sizing: border-box;
+  color: #fff;
+  margin: 0 auto;
+  padding: 100px 70px;
+}
+
+.technologies__title {
+  margin: 0;
+  padding-bottom: 23px;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  border-bottom: 1px solid #dadada;
+}
+
+.technologies__subtitle {
+  margin: 91px 0 26px;
+  text-align: center;
+  font-style: normal;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -2px;
+}
+
+.technologies__description {
+  margin: 0 auto;
+  max-width: 460px;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.56px;
+}
+
+.technologies__list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 100px 0 0;
+  padding: 0;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.technologies__list-item {
+  width: 90px;
+  padding: 21px 0 22px;
+  text-decoration: none;
+  border-radius: 10px;
+  background: #303030;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.56px;
+}
+
+@media screen and (max-width: 768px) {
+  .technologies {
+    padding: 90px 50px;
+    background: #272727;
+  }
+
+  .technologies__subtitle {
+    margin: 80px 0 23px;
+  }
+
+  .technologies__description {
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.48px;
+  }
+
+  .technologies__list {
+    margin-top: 83px;
+  }
+
+  .technologies__list-item {
+    width: 84px;
+    padding-top: 21px;
+    padding-bottom: 21px;
+    font-size: 12px;
+    letter-spacing: -0.48px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .technologies {
+    padding: 71px 18px 71px;
+    background: none;
+  }
+
+  .technologies__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #000;
+  }
+
+  .technologies__subtitle {
+    margin-top: 60px;
+    margin-bottom: 24px;
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1.2px;
+  }
+
+  .technologies__description {
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: -0.44px;
+    max-width: 292px;
+  }
+
+  .technologies__list {
+    margin: 0 auto;
+    margin-top: 50px;
+    max-width: 178px;
+    justify-content: flex-start;
+  }
+
+  .technologies__list-item {
+    padding: 21px 0;
+  }
+}

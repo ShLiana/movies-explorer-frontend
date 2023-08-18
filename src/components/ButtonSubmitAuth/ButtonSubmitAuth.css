@@ -1,0 +1,41 @@
+.button-submit-auth {
+  width: 396px;
+  height: 45px;
+  border-radius: 3px;
+  background: #4285f4;
+  margin: 0 0 16px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: normal;
+  font-style: normal;
+  color: #fff;
+  text-align: center;
+  border: none;
+  padding: 14px 0 15px;
+  cursor: pointer;
+}
+
+.button-submit-auth:hover {
+  opacity: 0.5;
+  transition: opacity 0.5s linear;
+}
+
+.button-submit-auth:disabled {
+  background: #8b8b8b;
+}
+
+@media screen and (max-width: 768px) {
+  .button-submit-auth {
+    padding-bottom: 16px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .button-submit-auth {
+    max-width: 260px;
+    font-size: 12px;
+    line-height: 15px;
+    padding-bottom: 17px;
+    margin-bottom: 13px;
+  }
+}
