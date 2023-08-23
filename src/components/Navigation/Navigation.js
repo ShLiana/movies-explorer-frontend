@@ -1,11 +1,11 @@
 // Navigation — компонент, который отвечает за меню навигации на сайте
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import './Navigation.css';
-import BurgerMenu from '../BurgerMenu/BurgerMenu';
-import profileIcon from '../../images/profile-icon.svg';
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import "./Navigation.css";
+import BurgerMenu from "../BurgerMenu/BurgerMenu";
+import profileIcon from "../../images/profile-icon.svg";
 
-const Navigation = ({ isLoggedIn }) => {
+const Navigation = ({ loggedIn }) => {
   const [isBurgerMenuClicked, setIsBurgerMenuClicked] = useState(false);
 
   const closeBurgerMenuClicked = () => {
@@ -17,51 +17,57 @@ const Navigation = ({ isLoggedIn }) => {
   };
 
   return (
-    <nav className='navigation'>
-      {!isLoggedIn ? (
+    <>
+      {!loggedIn ? (
         <>
-          <div className='navigation__authorization'>
-            <NavLink to='/signup' className='navigation__authorization-link'>
-              Регистрация
-            </NavLink>
-            <NavLink
-              to='signin'
-              className='navigation__authorization-link navigation__authorization-link_active'
-            >
-              Войти
-            </NavLink>
-          </div>
+          <nav className="navigation">
+            <div className="navigation__authorization">
+              <NavLink to="/signup" className="navigation__authorization-link">
+                Регистрация
+              </NavLink>
+              <NavLink
+                to="signin"
+                className="navigation__authorization-link navigation__authorization-link_active"
+              >
+                Войти
+              </NavLink>
+            </div>
+          </nav>
         </>
       ) : (
-        <div className='navigation__movies'>
-          <NavLink className='navigation__movies-link' to='/movies'>
-            Фильмы
-          </NavLink>
-          <NavLink className='navigation__movies-link' to='/saved-movies'>
-            Сохранённые фильмы
-          </NavLink>
-          <NavLink className='navigation__account' to='/profile'>
-            <button className='navigation__account-button' type='button'>
-              Аккаунт
-            </button>
-            <img
-              className='navigation__profile-icon'
-              src={profileIcon}
-              alt='Фотография пользователя'
-            ></img>
-          </NavLink>
-          <button
-            className='navigation__account-burger-menu-button'
-            type='button'
-            onClick={openBurgerMenuClicked}
-          />
-        </div>
+        <nav className="navigation">
+          <div className="navigation__movies">
+            <NavLink className="navigation__movies-link" to="/movies">
+              Фильмы
+            </NavLink>
+            <NavLink className="navigation__movies-link" to="/saved-movies">
+              Сохранённые фильмы
+            </NavLink>
+            <nav className="navigation__account">
+              <NavLink to="/profile">
+                <button className="navigation__account-button" type="button">
+                  Аккаунт
+                </button>
+                <img
+                  className="navigation__profile-icon"
+                  src={profileIcon}
+                  alt="Фотография пользователя"
+                ></img>
+              </NavLink>
+            </nav>
+            <button
+              className="navigation__account-burger-menu-button"
+              type="button"
+              onClick={openBurgerMenuClicked}
+            />
+          </div>
+        </nav>
       )}
       <BurgerMenu
         isOpen={isBurgerMenuClicked}
         onClose={closeBurgerMenuClicked}
       />
-    </nav>
+    </>
   );
 };
 
