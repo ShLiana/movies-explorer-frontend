@@ -9,10 +9,10 @@ import Preloader from "../Preloader/Preloader";
 
 const isLoading = false;
 
-const Movies = ({ isLoggedIn }) => {
+const Movies = ({ loggedIn }) => {
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} />
+      <Header loggedIn={loggedIn} />
       <main className="movies">
         <SearchForm />
         {isLoading ? <Preloader /> : <MoviesCardList movie={movies} />}
