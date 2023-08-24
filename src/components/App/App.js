@@ -1,40 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-//import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import * as mainApi from '../../utils/MainApi';
-import './App.css';
-import Main from '../Main/Main';
-import Movies from '../Movies/Movies';
-import SavedMovies from '../SavedMovies/SavedMovies';
-import Profile from '../Profile/Profile';
-import Login from '../Login/Login';
-import Register from '../Register/Register';
-import NotFoundPage from '../NotFoundPage/NotFoundPage';
-import * as apiAuth from '../../utils/apiAuth';
+import React, { useState, useEffect } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import * as mainApi from "../../utils/MainApi";
+import "./App.css";
+import Main from "../Main/Main";
+import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
+import Profile from "../Profile/Profile";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
+import * as apiAuth from "../../utils/apiAuth";
 
 function App() {
   // Стейты состояния пользователя
   const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setIsCurrentUser] = useState();
-  const [isEditUserInfoStatus, setIsEditUserInfoStatus] = useState('');
+  const [currentUser, setCurrentUser] = useState();
+  const [dataEditingStatus, setDataEditingStatus] = useState("");
   const [isTokenChecked, setIsTokenChecked] = useState(false);
-
-  // Стейты ошибок
-  const [isError, setIsError] = useState('');
   
+  // Стейты ошибок
+  const [isError, setIsError] = useState("");
+
   //добавили хук истории
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!loggedIn)
-    checkToken();
+    if (!loggedIn) checkToken();
   }, [loggedIn]);
 
   // проверка токена
   const checkToken = () => {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
     if (!jwt) {
       setIsTokenChecked(true);
       return;
@@ -42,7 +40,7 @@ function App() {
     mainApi
       .getUserInfo(jwt)
       .then((data) => {
-        setIsCurrentUser(data);
+        setCurrentUser(data);
         setLoggedIn(true);
       })
       .catch((err) => {
@@ -60,19 +58,19 @@ function App() {
         handleUserAuthorization({ email, password });
       })
       .catch((err) => {
-        if (err === 'Ошибка: 500') {
+        if (err === "Ошибка: 500") {
           console.log(err);
-          setIsError('На сервере произошла ошибка');
+          setIsError("На сервере произошла ошибка");
         }
-        if (err === 'Ошибка: 409') {
+        if (err === "Ошибка: 409") {
           console.log(err);
-          setIsError('Пользователь с таким email уже существует');
+          setIsError("Пользователь с таким email уже существует");
         } else {
-          setIsError('Переданы некорректные данные')
+          setIsError("Переданы некорректные данные");
         }
       })
       .finally(() => {
-        setTimeout(() => setIsError(''), 5000);
+        setTimeout(() => setIsError(""), 5000);
       });
   };
 
@@ -83,91 +81,87 @@ function App() {
       .then((res) => {
         if (res.token) {
           setLoggedIn(true);
-          localStorage.setItem('jwt', res.token); // в localStorage хранится токен
+          localStorage.setItem("jwt", res.token); // в localStorage хранится токен
           checkToken();
-          navigate('/movies'); // переадресация на страницу movies
+          navigate("/movies"); // переадресация на страницу movies
         }
-        Promise.all([mainApi.getUserInfo()]).then(
-          ([userInfo]) => {
-            console.log(userInfo);
-           
-            setIsCurrentUser(userInfo); // данные записываются в глобальную стейт-переменную
-         
-          
-          }
-        );
+        Promise.all([mainApi.getUserInfo()]).then(([userInfo]) => {
+          console.log(userInfo);
+
+          setCurrentUser(userInfo); // данные записываются в глобальную стейт-переменную
+        });
       })
-    
+
       .catch((err) => {
-        if (err === 'Ошибка: 500') {
+        if (err === "Ошибка: 500") {
           console.log(err);
-          setIsError('На сервере произошла ошибка');
+          setIsError("На сервере произошла ошибка");
         }
-        if (err === 'Ошибка: 401') {
+        if (err === "Ошибка: 401") {
           console.log(err);
-          setIsError('Вы ввели неправильный email или пароль');
+          setIsError("Вы ввели неправильный email или пароль");
         } else {
-          setIsError('Что-то пошло не так...')
+          setIsError("Что-то пошло не так...");
         }
         setLoggedIn(false);
-        localStorage.removeItem('jwt');
-        setIsCurrentUser(null);
+        localStorage.removeItem("jwt");
+        setCurrentUser(null);
       })
       .finally(() => {
-        setTimeout(() => setIsError(''), 3000);
-      })
+        setTimeout(() => setIsError(""), 3000);
+      });
   };
 
-  // Изменяем данные пользователя
-  const handleUpdateUser = (data) => {
-    const jwt = localStorage.getItem('jwt');
+  // Изменить данные пользователя
+  const updateUserInfo = (data) => {
+    const jwt = localStorage.getItem("jwt");
     mainApi
       .updateUserInfo(data, jwt)
       .then(() => {
-        setIsCurrentUser(data);
-        setTimeout(() => setIsEditUserInfoStatus(''), 3000);
+        setCurrentUser(data);
+        setTimeout(() => setDataEditingStatus(""), 3000);
       })
       .catch((err) => {
         console.log(err);
-        if (err === 'Ошибка: 409') {
-          setIsError('Ошибка 409');
+        if (err === "Ошибка: 409") {
+          setIsError("Ошибка 409");
         } else {
-          setIsError('Ошибка 400');
+          setIsError("Ошибка 400");
         }
-      })
+      });
   };
-//   // -------------------------SAVEDMOVIES----------------------------- //
+  //   // -------------------------SAVEDMOVIES----------------------------- //
 
   // обработчик выхода пользователя из аккаунта, обращение к API, очистка локального хранилища
-  const handleLogOut = () => {
-   localStorage.clear(); // удаление данных из localstorage
-    // сбрасываем все стейты при разлогинивании
+  const logOut = () => {
+    // очистить localStorage
+    localStorage.clear();
+    // сбрасить все стейты при разлогинивании
     setLoggedIn(false);
     checkToken(null);
-    setIsCurrentUser({});
+    setCurrentUser({});
     setIsTokenChecked(false);
     // переадресация на главную страницу
-    navigate('/');
+    navigate("/");
   };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className='page'>
+      <div className="page">
         <Routes>
-          <Route path='/' element={<Main loggedIn={loggedIn} />} />
+          <Route path="/" element={<Main loggedIn={loggedIn} />} />
           <Route
-            path='/movies'
+            path="/movies"
             element={
               <ProtectedRoute
                 element={Movies}
                 loggedIn={loggedIn}
                 isTokenChecked={isTokenChecked}
-       
               />
             }
           />
           <Route
-            path='/saved-movies'
+            path="/saved-movies"
             element={
               <ProtectedRoute
                 element={SavedMovies}
@@ -177,45 +171,42 @@ function App() {
             }
           />
           <Route
-            path='/profile'
+            path="/profile"
             element={
               <ProtectedRoute
                 element={Profile}
                 loggedIn={loggedIn}
                 isTokenChecked={isTokenChecked}
-                onUpdateUser={handleUpdateUser}
+                updateInfoAboutUser={updateUserInfo}
                 isError={isError}
-                isEditUserInfoStatus={isEditUserInfoStatus}
-                logOut={handleLogOut}
-                
+                dataEditingStatus={dataEditingStatus}
+                logOut={logOut}
               />
             }
           />
           <Route
-            path='/signin'
+            path="/signin"
             element={
               <Login
                 onLogin={handleUserAuthorization}
                 loggedIn={loggedIn}
                 isTokenChecked={isTokenChecked}
                 isError={isError}
-                isEditUserInfoStatus={isEditUserInfoStatus}
               />
             }
           />
           <Route
-            path='/signup'
+            path="/signup"
             element={
               <Register
                 onRegister={handleUserRegistration}
                 loggedIn={loggedIn}
                 isTokenChecked={isTokenChecked}
                 isError={isError}
-                isEditUserInfoStatus={isEditUserInfoStatus}
               />
             }
           />
-          <Route path='*' element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </CurrentUserContext.Provider>
