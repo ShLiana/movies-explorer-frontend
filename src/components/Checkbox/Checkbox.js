@@ -1,7 +1,7 @@
 // Checkbox — компонент для чекбокса короткометражки
 import './Checkbox.css';
 
-const Checkbox = () => {
+const Checkbox = ({ onCheckbox, checked }) => {
   return (
     <div className='checkbox'>
       <input
@@ -9,7 +9,8 @@ const Checkbox = () => {
         id='checkbox'
         type='checkbox'
         name='checkbox'
-      
+        onChange={onCheckbox}
+        checked={checked}
       />
       <label className='checkbox__name'>
         Короткометражки

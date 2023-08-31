@@ -14,7 +14,7 @@ const SavedMovies = ({
   onSubmit,
   isNotFound,
   savedMovies,
- 
+  checkbox,
   isChecked,
 }) => {
   return (
@@ -22,7 +22,7 @@ const SavedMovies = ({
       <Header loggedIn={loggedIn} />
       <main className="saved-movies">
         <SearchForm
-         
+          onCheckbox={checkbox}
           checked={isChecked}
           onSubmit={onSubmit}
         />
