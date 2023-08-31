@@ -46,8 +46,8 @@
   .movies {
     width: calc(100% - 60px);
     display: flex;
-  flex-direction: column;
-  justify-content: center;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .movies__more-button {
@@ -68,9 +68,7 @@
 }
 
 @media screen and (max-width: 320px) {
-  
   .movies__more-button {
     margin: 51px auto 0;
-  
   }
 }

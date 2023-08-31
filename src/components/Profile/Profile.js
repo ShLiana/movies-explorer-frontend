@@ -3,7 +3,6 @@ import React from "react";
 import { useContext, useEffect, useState } from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
-//import myPersonalData from "../../utils/myPersonalData";
 import ButtonSubmitAuth from "../ButtonSubmitAuth/ButtonSubmitAuth";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -14,29 +13,30 @@ const Profile = ({
   logOut,
   dataEditingStatus,
 }) => {
-  const { values, handleChange, isValid, setValues, resetForm } =
+  const { values, isValid, setValues, handleChange,  resetForm } =
     useFormWithValidation();
   const currentUser = useContext(CurrentUserContext);
-  //Переменные состояния активного состояния кнопки
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isInputDisabled, setIsInputDisabled] = useState(false);
+  // переменная состояния режима ввода данных в инпуты
+  const [isDataEntryMode, setIsDataEntryMode] = useState(false);
+  // Переменная состояния активного состояния кнопки
+  const [isActiveButtonMode, setIsActiveButtonMode] = useState(false);
+  
 
-  const inactiveButton =
+  const inactiveButtonMode =
     !isValid ||
     (currentUser.name === values.name && currentUser.email === values.email);
 
   // отобразить актуальную информацию о текущем пользователе
   useEffect(() => {
-    setIsInputDisabled(false);
+    setIsDataEntryMode(false);
     setValues({
       name: currentUser.name,
       email: currentUser.email,
     });
-  }, [currentUser, setValues, setIsInputDisabled]);
+  }, [currentUser, setValues, setIsDataEntryMode]);
 
   // Передаём значения управляемых компонентов во внешний обработчик
   function handleSubmit(event) {
-    // Запрещаем браузеру переходить по адресу формы
     event.preventDefault();
     if (isValid) {
       updateInfoAboutUser({
@@ -47,12 +47,12 @@ const Profile = ({
     }
   }
 
-  function handleEditProfileInfo() {
-    setIsInputDisabled(true);
+  function editUserData() {
+    setIsDataEntryMode(true);
   }
 
-  function handleSaveFunction() {
-    setIsSuccess(true);
+  function savedModeButton() {
+    setIsActiveButtonMode(true);
   }
 
   return (
@@ -62,7 +62,7 @@ const Profile = ({
         <h3 className="profile__greeting">Привет, {currentUser.name}!</h3>
         <form className="profile__form" noValidate onSubmit={handleSubmit}>
           <div className="profile__info">
-            <label className="profile__label" htmlFor="name">
+            <label className="profile__label">
               Имя
             </label>
             <input
@@ -72,7 +72,7 @@ const Profile = ({
               name="name"
               placeholder="Ваше имя"
               value={values?.name ?? currentUser.name}
-              disabled={isInputDisabled ? false : true}
+              disabled={isDataEntryMode ? false : true}
               required
               minLength="2"
               maxLength="40"
@@ -91,19 +91,19 @@ const Profile = ({
               name="email"
               placeholder="Ваш email"
               value={values?.email ?? currentUser.email}
-              disabled={isInputDisabled ? false : true}
+              disabled={isDataEntryMode ? false : true}
               onChange={handleChange}
               required
             />
           </div>
-          {isSuccess && <p className="profile__form"> {dataEditingStatus}</p>}
+          {isActiveButtonMode && <p className="profile__form"> {dataEditingStatus}</p>}
           <div className="profile__button-container">
-            {!isInputDisabled ? (
+            {!isDataEntryMode ? (
               <>
                 <button
                   className="profile__button profile__button_edit"
                   type="button"
-                  onClick={handleEditProfileInfo}
+                  onClick={editUserData}
                 >
                   Редактировать
                 </button>
@@ -119,8 +119,8 @@ const Profile = ({
               <ButtonSubmitAuth
                 type="submit"
                 text="Сохранить"
-                disabled={inactiveButton}
-                onClick={handleSaveFunction}
+                disabled={inactiveButtonMode}
+                onClick={savedModeButton}
               />
             )}
           </div>

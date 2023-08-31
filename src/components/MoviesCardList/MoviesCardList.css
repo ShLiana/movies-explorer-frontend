@@ -15,6 +15,22 @@
   gap: 43px;
 }
 
+.movies-cards-list__error-warning {
+  display: none;
+}
+
+.movies-cards-list__error-warning_active {
+  max-width: 600px;
+  color: red;
+  align-self: center;
+  text-align: center;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+  padding: 0;
+  margin: 10px auto 10px;
+}
+
 @media screen and (max-width: 768px) {
   .movies-cards-list {
     max-width: 708px;

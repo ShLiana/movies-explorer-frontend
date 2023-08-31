@@ -2,7 +2,6 @@
 import React from "react";
 import Authorization from "../Authorization/Authorization";
 import AuthorizationForm from "../AuthorizationForm/AuthorizationForm";
-//import ButtonSubmitAuth from "../ButtonSubmitAuth/ButtonSubmitAuth";
 import Form from "../Form/Form";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import { Navigate } from "react-router-dom";
@@ -39,7 +38,6 @@ const Register = ({ onRegister, errorMessage, isLoggedIn }) => {
       >
         <AuthorizationForm
           placeholder='Имя'
-          //label='Имя'
           id='name'
           name='name'
           type="text"
@@ -52,7 +50,6 @@ const Register = ({ onRegister, errorMessage, isLoggedIn }) => {
         />
         <AuthorizationForm
           placeholder="E-mail"
-          //label='E-mail'
           id="email"
           name="email"
           type="email"
@@ -65,7 +62,6 @@ const Register = ({ onRegister, errorMessage, isLoggedIn }) => {
         />
         <AuthorizationForm
           placeholder="Пароль"
-          //label='Пароль'
           id="password"
           type="password"
           name="password"

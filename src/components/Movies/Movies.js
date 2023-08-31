@@ -4,25 +4,60 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import movies from "../../utils/movies";
 import Preloader from "../Preloader/Preloader";
+import { useState, useEffect } from "react";
 
-const isLoading = false;
 
-const Movies = ({ loggedIn }) => {
+const Movies = ({
+  loggedIn,
+  onSubmit,
+  isLoading,
+  isNotFound,
+  isServerError,
+  movies,
+  onCheckbox,
+  checked,
+  checkLike,
+  savedMovies,
+  onSaveMovie,
+  onDelete,
+}) => {
+  
   return (
     <>
       <Header loggedIn={loggedIn} />
       <main className="movies">
-        <SearchForm />
-        {isLoading ? <Preloader /> : <MoviesCardList movie={movies} />}
-        <button
-          className="movies__more-button"
-          type="button"
-          aria-label="Добавить больше фильмов на страницу"
-        >
-          Ещё
-        </button>
+        <SearchForm
+          onSubmit={onSubmit}
+          onCheckbox={onCheckbox}
+          checked={checked}
+        
+        />
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList
+           
+            isNotFound={isNotFound}
+            isServerError={isServerError}
+            onSaveMovie={onSaveMovie}
+            checkLike={checkLike}
+            savedMovies={savedMovies}
+            isMoviesPage={true}
+            onDelete={onDelete}
+          />
+        )}
+
+      
+          <button
+            className="movies__more-button"
+           // onClick={showMoreMoviesButton}
+            aria-label="Добавить больше фильмов на страницу"
+            type="button"
+          >
+            Ещё
+          </button>
+ 
       </main>
       <Footer />
     </>

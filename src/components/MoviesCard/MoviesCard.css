@@ -57,7 +57,7 @@
   background-image: url(../../images/unactive-like-icon.svg);
   margin: 0;
   background-color: transparent;
-  width: 14px;
+  width: 20px;
   height: 12px;
   border: none;
   cursor: pointer;
@@ -68,10 +68,23 @@
   opacity: 0.5;
 }
 
-.movies-card__like_active {
+/*.movies-card__like_active {
   background-image: url(../../images/active-like-icon.svg);
   cursor: pointer;
   width: 20px;
+  background-color: transparent;
+}*/
+
+.movies-card__like_active {
+  margin: 0;
+  padding: 0;
+  background-image: url(../../images/active-like-icon.svg);
+  margin: 0;
+  background-color: transparent;
+  width: 20px;
+  height: 12px;
+  border: none;
+  cursor: pointer;
 }
 
 .movies-card__delete {

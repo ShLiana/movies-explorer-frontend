@@ -8,7 +8,8 @@ const Checkbox = () => {
         className='checkbox__input'
         id='checkbox'
         type='checkbox'
-        value='yes'
+        name='checkbox'
+      
       />
       <label className='checkbox__name'>
         Короткометражки

@@ -1,18 +1,40 @@
 // SavedMovies — компонент страницы с сохранёнными карточками фильмов
-import './SavedMovies.css';
-import SearchForm from '../SearchForm/SearchForm';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import movies from '../../utils/movies';
+import "./SavedMovies.css";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-const SavedMovies = ({ isLoggedIn }) => {
+const SavedMovies = ({
+  loggedIn,
+  movies,
+  onLike,
+  onDelete,
+  checkLike,
+  onSubmit,
+  isNotFound,
+  savedMovies,
+ 
+  isChecked,
+}) => {
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} />
-      <main className='saved-movies'>
-        <SearchForm />
-        <MoviesCardList movie={movies}/>
+      <Header loggedIn={loggedIn} />
+      <main className="saved-movies">
+        <SearchForm
+         
+          checked={isChecked}
+          onSubmit={onSubmit}
+        />
+        <MoviesCardList
+          movies={movies}
+          checkLike={checkLike}
+          isNotFound={isNotFound}
+          onLike={onLike}
+          savedMovies={savedMovies}
+          onDelete={onDelete}
+          isMoviesPage={false}
+        />
       </main>
       <Footer />
     </>
@@ -20,4 +42,3 @@ const SavedMovies = ({ isLoggedIn }) => {
 };
 
 export default SavedMovies;
-
