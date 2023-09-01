@@ -13,7 +13,7 @@ const Profile = ({
   logOut,
   dataEditingStatus,
 }) => {
-  const { values, isValid, setValues, handleChange,  resetForm } =
+  const { values, isValid, setValues, handleChange,  resetForm, errors } =
     useFormWithValidation();
   const currentUser = useContext(CurrentUserContext);
   // переменная состояния режима ввода данных в инпуты
@@ -96,6 +96,7 @@ const Profile = ({
               required
             />
           </div>
+          <span className='profile__form_error-warning'>{errors.email || ''}</span>
           {isActiveButtonMode && <p className="profile__form"> {dataEditingStatus}</p>}
           <div className="profile__button-container">
             {!isDataEntryMode ? (

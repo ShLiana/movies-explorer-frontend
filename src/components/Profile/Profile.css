@@ -98,6 +98,15 @@
   padding-top: 16px;
 }
 
+.profile__form_error-warning {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+  margin-bottom: 5px;
+  height: 12px;
+}
+
 @media screen and (max-width: 768px) {
   .profile__greeting {
     margin: 233px auto 98px;
