@@ -1,5 +1,4 @@
-//export const BASE_URL = 'http://api.movies-app.nomoredomains.work';
-export const BASE_URL = 'https://api.movies-app.nomoredomains.work';
+export const BASE_URL = 'http://api.movies-app.nomoredomains.work';
 export const MOVIE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
 //проверяем ответ с сервера
