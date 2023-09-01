@@ -4,7 +4,6 @@ import { checkResponse, BASE_URL } from './Constants';
 export const register = ({ name, email, password }) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
-    //credentials: "include",
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -18,7 +17,6 @@ export const register = ({ name, email, password }) => {
 export const login = ({ email, password }) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
-    //credentials: "include",
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
