@@ -2,4 +2,6 @@
 
 Ссылка на back-end: https://github.com/ShLiana/movies-explorer-api
 
-ссылка на сайт: http://api.movies-app.nomoredomains.work
+ссылка на сайт: https://movies-app.nomoredomains.work
+
+ссылка на пул-реквест: https://github.com/ShLiana/movies-explorer-frontend/pull/2
