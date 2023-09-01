@@ -6,6 +6,7 @@ import Header from "../Header/Header";
 import ButtonSubmitAuth from "../ButtonSubmitAuth/ButtonSubmitAuth";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+//import { ERRORS_LIST } from "../../utils/errorsConstants";
 
 const Profile = ({
   loggedIn,
@@ -13,14 +14,13 @@ const Profile = ({
   logOut,
   dataEditingStatus,
 }) => {
-  const { values, isValid, setValues, handleChange,  resetForm, errors } =
+  const { values, isValid, setValues, handleChange, resetForm, errors } =
     useFormWithValidation();
   const currentUser = useContext(CurrentUserContext);
   // переменная состояния режима ввода данных в инпуты
   const [isDataEntryMode, setIsDataEntryMode] = useState(false);
   // Переменная состояния активного состояния кнопки
   const [isActiveButtonMode, setIsActiveButtonMode] = useState(false);
-  
 
   const inactiveButtonMode =
     !isValid ||
@@ -62,9 +62,7 @@ const Profile = ({
         <h3 className="profile__greeting">Привет, {currentUser.name}!</h3>
         <form className="profile__form" noValidate onSubmit={handleSubmit}>
           <div className="profile__info">
-            <label className="profile__label">
-              Имя
-            </label>
+            <label className="profile__label">Имя</label>
             <input
               className="profile__input"
               id="name"
@@ -80,6 +78,9 @@ const Profile = ({
             />
           </div>
           <div className="profile__line"></div>
+          <span className="profile__form_error-warning">
+            {errors.name || ""}
+          </span>
           <div className="profile__info">
             <label className="profile__label" htmlFor="email">
               E-mail
@@ -96,8 +97,13 @@ const Profile = ({
               required
             />
           </div>
-          <span className='profile__form_error-warning'>{errors.email || ''}</span>
-          {isActiveButtonMode && <p className="profile__form"> {dataEditingStatus}</p>}
+          <span className="profile__form_error-warning">
+            {errors.email || ""}
+          </span>
+          {isActiveButtonMode && (
+            <p className="profile__form"> {dataEditingStatus}</p>
+          )}
+
           <div className="profile__button-container">
             {!isDataEntryMode ? (
               <>
