@@ -101,7 +101,7 @@ const Profile = ({
             {errors.email || ""}
           </span>
           {isActiveButtonMode && (
-            <p className="profile__form"> {dataEditingStatus}</p>
+            <p className="profile__form-edit-status"> {dataEditingStatus}</p>
           )}
 
           <div className="profile__button-container">
