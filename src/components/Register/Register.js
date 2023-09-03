@@ -7,7 +7,7 @@ import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import { Navigate } from "react-router-dom";
 
 const Register = ({ onRegister, errorText, isLoggedIn }) => {
-  const { values, handleChange, errors, isValid, resetForm } =
+  const { values, handleChange, errors, isValid } =
     useFormWithValidation();
 
   const handleSubmit = (evt) => {

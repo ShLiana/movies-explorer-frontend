@@ -30,23 +30,7 @@ const MoviesCard = ({
 
   return (
     <li className="movies-card">
-      <a
-        href={movie.trailerLink}
-        className="movies-card__trailer-link"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <img
-          className="movies-card__image"
-          src={
-            location === "/movies"
-              ? `https://api.nomoreparties.co/${movie.image.url}`
-              : `${movie.image}`
-          }
-          alt={`постер к фильму ${movie.nameRU || movie.nameEN}`}
-        />
-      </a>
-      <div className="movies-card__info">
+       <div className="movies-card__info">
         <h2 className="movies-card__title">{movie.nameRU || movie.nameEN}</h2>
         <p className="movies-card__duration">
           {movieDurationConverter(movie.duration)}
@@ -65,6 +49,23 @@ const MoviesCard = ({
           />
         )}
       </div>
+      <a
+        href={movie.trailerLink}
+        className="movies-card__image"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          className="movies-card__image"
+          src={
+            location === "/movies"
+              ? `https://api.nomoreparties.co/${movie.image.url}`
+              : `${movie.image}`
+          }
+          alt={`постер к фильму ${movie.nameRU || movie.nameEN}`}
+        />
+      </a>
+     
     </li>
   );
 };
