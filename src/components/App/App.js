@@ -312,7 +312,7 @@ function App() {
     }
   }, [savedMovies]);
 
-  // Изменить ползунов чекбокса на короткометражки
+  // Изменить ползунок чекбокса на короткометражки
   const changeCheckboxSlidersSavedMovies = () => {
     setCheckboxSavedMovies(!checkboxSavedMovies);
     if (!checkboxSavedMovies) {
