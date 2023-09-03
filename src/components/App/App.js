@@ -31,6 +31,7 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]); // стейт массива сохранённых фильмов - пустой массив зависимостей
   const [allMoviesShow, setAllMoviesShow] = useState(savedMovies);
   const [filteredMoviesList, setFilteredMoviesList] = useState(allMoviesShow);
+  const [preloader, setPreloader] = useState(false);
 
   // ошибки
   const [errorText, setErrorText] = useState();
@@ -139,7 +140,6 @@ function App() {
         setLoggedIn(false);
         localStorage.removeItem("jwt");
         setCurrentUser(null);
-      
       })
       .finally(() => {
         setTimeout(() => setErrorText(""), 5000);
@@ -215,6 +215,7 @@ function App() {
     if (allMovies.length === 0) {
       // если фильм отсутствует в сторедж нет, то направляем запрос к BeatfilmMoviesApi
       setIsLoading(true);
+      setPreloader(false);
       moviesApi
         .getAllMovies()
         .then((movies) => {
@@ -226,9 +227,6 @@ function App() {
         .catch((err) => {
           setIsServerError(true);
           console.log(err);
-        })
-        .finally(() => {
-          setTimeout(() => setIsLoading(false), 1500);
         });
     } else {
       userFilteredMovies(allMovies, keyword, checkboxSelected);
@@ -433,6 +431,7 @@ function App() {
                 isServerError={isServerError}
                 savedMovies={savedMovies}
                 onDelete={deleteMovie}
+                preloader={preloader}
               />
             }
           />

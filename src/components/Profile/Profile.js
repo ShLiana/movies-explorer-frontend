@@ -6,7 +6,6 @@ import Header from "../Header/Header";
 import ButtonSubmitAuth from "../ButtonSubmitAuth/ButtonSubmitAuth";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-//import { ERRORS_LIST } from "../../utils/errorsConstants";
 
 const Profile = ({
   loggedIn,
