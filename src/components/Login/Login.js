@@ -7,7 +7,7 @@ import AuthorizationForm from '../AuthorizationForm/AuthorizationForm';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { Navigate } from 'react-router-dom';
 
-const Login = ({ onLogin, errorMessage, loggedIn }) => {
+const Login = ({ onLogin, errorText, loggedIn }) => {
   const { values, handleChange, errors, isValid, resetForm } =
   useFormWithValidation();
 
@@ -35,7 +35,7 @@ const Login = ({ onLogin, errorMessage, loggedIn }) => {
     >
       <Form
       onSubmit={handleSubmit}
-      errorMessage={errorMessage || ''}
+      errorText={errorText || ''}
       text='Войти'
       disabled={!isValid}
     >

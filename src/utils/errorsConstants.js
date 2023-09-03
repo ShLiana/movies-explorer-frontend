@@ -9,7 +9,7 @@ export const ERRORS_LIST = {
   
     REGISTRATION_ERROR_STATUS_409: 'Пользователь с таким email уже существует',
     REGISTRATION_DEFAUTLT: 'Переданные данные некорректны',
-  
+    
     AUTHORIZATION_ERROR_STATUS_401: 'Вы ввели неправильный email или пароль',
     AUTHORIZATION_DEFAULT: 'Что-то пошло не так...',
   
