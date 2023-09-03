@@ -17,7 +17,6 @@ const Register = ({ onRegister, errorText, isLoggedIn }) => {
       return;
     }
     onRegister(values);
-    resetForm();
   };
 
   if (isLoggedIn) return <Navigate to="/" replace />;

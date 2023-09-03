@@ -104,7 +104,7 @@ function App() {
         }
       })
       .finally(() => {
-        setTimeout(() => setErrorText(""), 3000);
+        setTimeout(() => setErrorText(""), 5000);
       });
   };
 
@@ -139,9 +139,10 @@ function App() {
         setLoggedIn(false);
         localStorage.removeItem("jwt");
         setCurrentUser(null);
+      
       })
       .finally(() => {
-        setTimeout(() => setErrorText(""), 3000);
+        setTimeout(() => setErrorText(""), 5000);
       });
   };
 

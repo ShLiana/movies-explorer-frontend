@@ -1,6 +1,6 @@
 // Navigation — компонент, который отвечает за меню навигации на сайте
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Navigation.css";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import profileIcon from "../../images/profile-icon.svg";
@@ -22,29 +22,29 @@ const Navigation = ({ loggedIn }) => {
         <>
           <nav className="navigation">
             <div className="navigation__authorization">
-              <NavLink to="/signup" className="navigation__authorization-link">
+              <Link to="/signup" className="navigation__authorization-link">
                 Регистрация
-              </NavLink>
-              <NavLink
+              </Link>
+              <Link
                 to="signin"
                 className="navigation__authorization-link navigation__authorization-link_active"
               >
                 Войти
-              </NavLink>
+              </Link>
             </div>
           </nav>
         </>
       ) : (
         <nav className="navigation">
           <div className="navigation__movies">
-            <NavLink className="navigation__movies-link" to="/movies">
+            <NavLink to="/movies" className="navigation__movies-link" >
               Фильмы
             </NavLink>
-            <NavLink className="navigation__movies-link" to="/saved-movies">
+            <NavLink to="/saved-movies" className="navigation__movies-link " >
               Сохранённые фильмы
             </NavLink>
             <nav className="navigation__account">
-              <NavLink to="/profile">
+              <Link to="/profile">
                 <button className="navigation__account-button" type="button">
                   Аккаунт
                 </button>
@@ -53,7 +53,7 @@ const Navigation = ({ loggedIn }) => {
                   src={profileIcon}
                   alt="Фотография пользователя"
                 ></img>
-              </NavLink>
+              </Link>
             </nav>
             <button
               className="navigation__account-burger-menu-button"
