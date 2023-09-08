@@ -26,23 +26,26 @@ function App() {
   // фильмы
   const [allMovies, setAllMovies] = useState([]); // Все фильмы
   const [allFoundMoviesList, setAllFoundMoviesList] = useState([]); // Список найденных фильмов
-  const [moviesFoundThroughSearchForm, setMoviesFoundThroughSearchForm] =
-    useState([]); // Список фильмов найденных через форму поиска
+  const [
+    moviesFoundThroughKeywordAndCheckbox,
+    setMoviesFoundThroughKeywordAndCheckbox,
+  ] = useState([]); // Список фильмов найденных и по ключевому слову, и по длительности
+
+  // сохраненные фильмы
   const [savedMovies, setSavedMovies] = useState([]); // стейт массива сохранённых фильмов - пустой массив зависимостей
   const [allMoviesShow, setAllMoviesShow] = useState(savedMovies);
   const [filteredMoviesList, setFilteredMoviesList] = useState(allMoviesShow);
-  const [preloader, setPreloader] = useState(false);
 
   // ошибки
   const [errorText, setErrorText] = useState();
   const [isServerError, setIsServerError] = useState(false); // Произошла ошибка при поиске фильмов
   const [isNotFound, setIsNotFound] = useState(false); // Фильмы по запросу не найдены
-  const [isLoading, setIsLoading] = useState(false); // загрузка информации
+  const [isLoading, setIsLoading] = useState(false); // загрузка прелоадера
   const [isNotFoundSaved, setIsNotFoundSaved] = useState(false);
 
-  // чекбокс
+  // стейты чекбокса
   const [checkboxSelected, setCheckboxSelected] = useState(false); // чекбокс не отмечен
-  const [keywordSearch, setKeywordSearch] = useState(""); // Ключевое слово
+  const [keywordSearch, setKeywordSearch] = useState("");
   const [checkboxSavedMovies, setCheckboxSavedMovies] = useState(false);
 
   // добавили хук истории
@@ -70,6 +73,7 @@ function App() {
         setLoggedIn(false);
       })
       .finally(() => setIsCheckToken(true));
+
     mainApi
       .getSavedMovies(jwt)
       .then(({ data }) => {
@@ -123,6 +127,7 @@ function App() {
         Promise.all([mainApi.getUserInfo(), moviesApi.getAllMovies()]).then(
           ([userInfo, userMovies]) => {
             setCurrentUser(userInfo); // данные записываются в глобальную стейт-переменную
+
             localStorage.setItem("movies", JSON.stringify(userMovies));
             setAllMovies(JSON.parse(localStorage.getItem("movies")));
           }
@@ -174,55 +179,61 @@ function App() {
     setCheckboxSelected(
       localStorage.getItem("checkboxSelected" || "") === "true"
     );
-    if (localStorage.getItem("moviesFoundThroughSearchForm")) {
+    // если в локалсторедж есть фильмы, найденные через форму поиска, записываем их в переменную movies
+    if (localStorage.getItem("moviesFoundThroughKeywordAndCheckbox")) {
       const movies = JSON.parse(
-        localStorage.getItem("moviesFoundThroughSearchForm")
+        localStorage.getItem("moviesFoundThroughKeywordAndCheckbox")
       );
       setAllFoundMoviesList(movies);
       if (movies.length === 0) {
         setIsNotFound(true);
       }
       if (localStorage.getItem("checkboxSelected") === "true") {
-        setMoviesFoundThroughSearchForm(shortMoviesFiltered(movies));
+        setMoviesFoundThroughKeywordAndCheckbox(shortMoviesFiltered(movies));
       } else {
-        setMoviesFoundThroughSearchForm(movies);
+        setMoviesFoundThroughKeywordAndCheckbox(movies);
       }
     }
   }, []);
 
   // Ищем фильм по выбранным параметрам
-  const userFilteredMovies = (movies, keyword, checkbox) => {
-    setIsLoading(true);
+  function userFilteredMovies(movies, keyword, checkbox) {
+    //фильтрация фильмов локально
     const moviesFilterList = searchMoviesList(movies, keyword, false);
     // если фильм не найден, то выходит сообщение об ошибке
     moviesFilterList.length === 0 ? setIsNotFound(true) : setIsNotFound(false);
+    //установили стейт setAllFoundMoviesList, в ктр записали отфильтрованные локально фильмы
     setAllFoundMoviesList(moviesFilterList);
-    setMoviesFoundThroughSearchForm(
+    //установили стейт setMoviesFoundThroughKeywordAndCheckbox взависимости от положения чекбокса
+    setMoviesFoundThroughKeywordAndCheckbox(
       checkbox ? shortMoviesFiltered(moviesFilterList) : moviesFilterList
     );
     // записывает в локалсторедж moviesFoundThroughSearchForm
     localStorage.setItem(
+      setIsLoading(false),
       "moviesFoundThroughSearchForm",
       JSON.stringify(moviesFilterList)
     );
-    setTimeout(() => setIsLoading(false), 1500);
-  };
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 1000);
+  }
 
-  // Обработка запроса по поиску фильма
-  const userMovieRequest = (keyword) => {
-    localStorage.setItem("searchKeyword", keyword); // Записываем набранное ключевое слово
-    localStorage.setItem("checkboxSelected", checkboxSelected); // Записываем положение чекбокса
+  // Обработка запроса по поиску фильма по ключевому слову
+  function userMovieRequest(keyword) {
+    // сохраняем набранное ключевое слово
+    localStorage.setItem("searchKeyword", keyword);
+    // сохраняем положение чекбокса
+    localStorage.setItem("checkboxSelected", checkboxSelected);
     if (allMovies.length === 0) {
       // если фильм отсутствует в сторедж нет, то направляем запрос к BeatfilmMoviesApi
-      setIsLoading(true);
-      setPreloader(false);
       moviesApi
         .getAllMovies()
         .then((movies) => {
-          setIsLoading(true);
-          localStorage.setItem("allMovies", JSON.stringify(movies)); // Записываем полученные фильмы с BeatfilmMoviesApi
+          // записываем полученные фильмы с Beatfilm
+          localStorage.setItem("allMovies", JSON.stringify(movies));
           setAllMovies(movies);
-          userFilteredMovies(movies, keyword, checkboxSelected); // Получаем фильмы по запросу и выбранным параметрам
+          // Получаем фильмы по запросу и выбранным параметрам
+          userFilteredMovies(movies, keyword, checkboxSelected);
         })
         .catch((err) => {
           setIsServerError(true);
@@ -231,34 +242,34 @@ function App() {
     } else {
       userFilteredMovies(allMovies, keyword, checkboxSelected);
     }
-  };
+  }
 
   // Изменение состояния ползунка чекбокса
-  const changeCheckbox = () => {
+  function changeCheckbox() {
     setCheckboxSelected(!checkboxSelected);
     console.log(checkboxSelected);
     if (!checkboxSelected) {
       const filteredShortMovies = shortMoviesFiltered(allFoundMoviesList);
-      setMoviesFoundThroughSearchForm(filteredShortMovies);
+      setMoviesFoundThroughKeywordAndCheckbox(filteredShortMovies);
       if (filteredShortMovies.length === 0) {
         setIsNotFound(true);
       }
     } else {
-      setMoviesFoundThroughSearchForm(allFoundMoviesList);
+      setMoviesFoundThroughKeywordAndCheckbox(allFoundMoviesList);
       if (allFoundMoviesList.length > 0) {
         setIsNotFound(false);
       }
     }
     localStorage.setItem("checkboxSelected", !checkboxSelected);
-  };
+  }
 
   // Проверка поставлен ли лайк
-  const checkLike = (movie) => {
+  function checkLike(movie) {
     return savedMovies.some((item) => item.movieId === movie.id);
-  };
+  }
 
   // Обработчик запроса на сохранение фильма - если лайк поставлен = фильм сохранен на странице "сохраненные фильмы"
-  const onLike = (movie) => {
+  function onLike(movie) {
     const jwt = localStorage.getItem("jwt");
     mainApi
       .addNewMovie(movie, jwt)
@@ -270,7 +281,7 @@ function App() {
       .catch((err) => {
         console.log("Возникла ошибка при сохранении фильма:", err);
       });
-  };
+  }
 
   // Обработчик запроса на удаления фильма со страницы 'Сохраненные фильмы'
   const deleteMovie = (movie) => {
@@ -284,8 +295,9 @@ function App() {
       .then(() => {
         setSavedMovies(savedMovies.filter((c) => c._id !== deleteCard._id));
         setFilteredMoviesList(
-          savedMovies.filter((c) => c._id !== deleteCard._id)
+          filteredMoviesList.filter((c) => c._id !== deleteCard._id)
         );
+        setAllMoviesShow(allMoviesShow.filter((c) => c._id !== deleteCard._id));
       })
       .catch((err) => {
         console.log(err);
@@ -295,64 +307,40 @@ function App() {
   // Страница с сохраненными фильмами
   useEffect(() => {
     if (savedMovies.length === 0) return;
-    if (moviesFoundThroughSearchForm.length === 0) {
+    if (moviesFoundThroughKeywordAndCheckbox.length === 0) {
       setErrorText(SEARCH_ERRORS.NOT_FOUND);
     } else {
       setErrorText("");
     }
-  }, [moviesFoundThroughSearchForm, savedMovies, keywordSearch]);
-
-  useEffect(() => {
-    if (localStorage.getItem("checkboxSavedMovies") === "true") {
-      setCheckboxSavedMovies(true);
-      setAllMoviesShow(shortMoviesFiltered(savedMovies));
-    } else {
-      setCheckboxSavedMovies(false);
-      setAllMoviesShow(savedMovies);
-    }
-  }, [savedMovies]);
+  }, [moviesFoundThroughKeywordAndCheckbox, savedMovies, keywordSearch]);
 
   // Изменить ползунок чекбокса на короткометражки
-  const changeCheckboxSlidersSavedMovies = () => {
+  function changeCheckboxSlidersSavedMovies() {
     setCheckboxSavedMovies(!checkboxSavedMovies);
     if (!checkboxSavedMovies) {
       localStorage.setItem("checkboxSavedMovies", true);
-      setCheckboxSavedMovies(true);
-      setAllMoviesShow(shortMoviesFiltered(filteredMoviesList));
-      if (shortMoviesFiltered(filteredMoviesList).length === 0) {
-        setIsNotFoundSaved(true);
-      }
-      setIsNotFoundSaved(false);
+      const shortFilteredMovies = shortMoviesFiltered(filteredMoviesList);
+      setAllMoviesShow(shortFilteredMovies);
+      setIsNotFoundSaved(shortFilteredMovies.length === 0);
     } else {
-      setCheckboxSavedMovies(false);
       localStorage.setItem("checkboxSavedMovies", false);
-      if (filteredMoviesList.length === 0) {
-        setIsNotFoundSaved(true);
-        setAllMoviesShow(filteredMoviesList);
-      }
-      setIsNotFoundSaved(false);
+      setIsNotFoundSaved(filteredMoviesList.length === 0);
       setAllMoviesShow(filteredMoviesList);
     }
-  };
+  }
 
   // Поиск на странице "Сохраненные фильмы"
-  const searchSavedMovies = (keyword) => {
+  function searchSavedMovies(keyword) {
     console.log(savedMovies);
     const foundSavedMovies = searchMoviesList(
       savedMovies,
       keyword,
       checkboxSavedMovies
     );
-    if (foundSavedMovies.length === 0) {
-      setIsNotFoundSaved(true);
-      setAllMoviesShow(foundSavedMovies);
-      setFilteredMoviesList(foundSavedMovies);
-    } else {
-      setIsNotFoundSaved(false);
-      setFilteredMoviesList(foundSavedMovies);
-      setAllMoviesShow(foundSavedMovies);
-    }
-  };
+    setIsNotFoundSaved(foundSavedMovies.length === 0);
+    setAllMoviesShow(foundSavedMovies);
+    setFilteredMoviesList(foundSavedMovies);
+  }
 
   const location = useLocation();
 
@@ -376,10 +364,10 @@ function App() {
     setIsLoading(false);
     setAllFoundMoviesList([]);
     setSavedMovies([]);
-    setMoviesFoundThroughSearchForm(false);
+    setMoviesFoundThroughKeywordAndCheckbox(false);
     setCheckboxSelected(false);
     setKeywordSearch("");
-    setMoviesFoundThroughSearchForm([]);
+    setMoviesFoundThroughKeywordAndCheckbox([]);
     setIsNotFoundSaved(false);
     setIsNotFound(false);
     // редирект на главную страницу
@@ -420,7 +408,7 @@ function App() {
                 element={Movies}
                 loggedIn={loggedIn}
                 isTokenChecked={isCheckToken}
-                movies={moviesFoundThroughSearchForm}
+                movies={moviesFoundThroughKeywordAndCheckbox}
                 isLoading={isLoading}
                 onSaveMovie={onLike}
                 onCheckbox={changeCheckbox}
@@ -431,7 +419,6 @@ function App() {
                 isServerError={isServerError}
                 savedMovies={savedMovies}
                 onDelete={deleteMovie}
-                preloader={preloader}
               />
             }
           />

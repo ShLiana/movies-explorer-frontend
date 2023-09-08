@@ -32,15 +32,15 @@ const Movies = ({
   onDelete,
 }) => {
   const currentScreenWidth = useWindowWidth(); // получили текущую ширину экрана
-  const [cardCounterOnMoreButton, setcardCounterOnMoreButton] = useState(""); // стейт счетчика добавленных фильмов при нажатии на "еще"
-  const [moviesCardList, setMoviesCardList] = useState({}); // стейт отображаемых на экране карточек с фильмами
+  const [cardCounterOnMoreButton, setCardCounterOnMoreButton] = useState(0); // стейт счетчика добавленных фильмов при нажатии на "еще"
+  const [moviesCardList, setMoviesCardList] = useState(0); // стейт отображаемых на экране карточек с фильмами
 
   // useEffect с условиями демонстрации количества карточек в зависимости от ширины экрана
   useEffect(() => {
     // если текущая ширина экрана больше 768px, то добавляем 4 ряда + 1 ряд
     if (currentScreenWidth > screen_width_768) {
       setMoviesCardList(count_of_cards_1280);
-      setcardCounterOnMoreButton(count_of_added_cards_1);
+      setCardCounterOnMoreButton(count_of_added_cards_1);
     }
     // если текущая ширина экрана меньше 768px, но больше 480 px, то добавляем 4 ряда + 1 ряд
     if (
@@ -48,14 +48,14 @@ const Movies = ({
       currentScreenWidth > screen_width_480
     ) {
       setMoviesCardList(count_of_cards_768);
-      setcardCounterOnMoreButton(count_of_added_cards_1);
+      setCardCounterOnMoreButton(count_of_added_cards_1);
     }
     // если текущая ширина экрана меньше или равна 480 px, то добавляем 5 рядов + 2 ряда
     if (currentScreenWidth <= screen_width_480) {
       setMoviesCardList(count_of_cards_480);
-      setcardCounterOnMoreButton(count_of_added_cards_2);
+      setCardCounterOnMoreButton(count_of_added_cards_2);
     }
-  }, [currentScreenWidth]);
+  }, [currentScreenWidth, movies]);
 
   // обработчик нажатий на кнопку 'Ещё'
   const showMoreMoviesButton = () => {
@@ -63,7 +63,7 @@ const Movies = ({
   };
 
   const searchKeyword = localStorage.getItem("searchKeyword") || "";
-
+ 
   return (
     <>
       <Header loggedIn={loggedIn} />

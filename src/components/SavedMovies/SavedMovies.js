@@ -14,15 +14,15 @@ const SavedMovies = ({
   onSubmit,
   isNotFound,
   savedMovies,
-  checkbox,
   isChecked,
+  onCheckbox,
 }) => {
   return (
     <>
       <Header loggedIn={loggedIn} />
       <main className="saved-movies">
         <SearchForm
-          onCheckbox={checkbox}
+          onCheckbox={onCheckbox}
           checked={isChecked}
           onSubmit={onSubmit}
         />
