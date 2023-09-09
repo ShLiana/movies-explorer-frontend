@@ -40,13 +40,24 @@
   cursor: pointer;
   background-image: url(../../images/find-icon.svg);
   align-items: center;
-  /*margin: auto 6px auto 0;*/
   margin: 6px 6px 6px;
 }
 
 .searchform__button-find:hover {
   transition: opacity 0.5s linear;
   opacity: 0.5;
+}
+
+.searchform__error-warning {
+  position: absolute;
+  max-width: 396px;
+  color: red;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+  padding: 10px 22px;
 }
 
 @media screen and (max-width: 768px) {

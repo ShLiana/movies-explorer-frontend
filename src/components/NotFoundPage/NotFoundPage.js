@@ -1,16 +1,17 @@
 //NotFoundPage — компонент страницы c ошибкой 404 - страница не найдена
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './NotFoundPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const NotFoundPage = () => {
+  const navigate = useNavigate();
   return (
     <section className='not-found-page'>
       <h2 className='not-found-page__title'>404</h2>
       <p className='not-found-page__warning-text'>Страница не найдена</p>
-      <Link to='/' className='not-found-page__back-button'>
+      <button className='not-found-page__back-button' onClick={() => navigate(-1)}>
         Назад
-      </Link>
+      </button>
     </section>
   );
 };

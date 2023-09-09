@@ -1,14 +1,16 @@
 // Checkbox — компонент для чекбокса короткометражки
 import './Checkbox.css';
 
-const Checkbox = () => {
+const Checkbox = ({ onCheckbox, checked }) => {
   return (
     <div className='checkbox'>
       <input
         className='checkbox__input'
         id='checkbox'
         type='checkbox'
-        value='yes'
+        name='checkbox'
+        onChange={onCheckbox}
+        checked={checked}
       />
       <label className='checkbox__name'>
         Короткометражки

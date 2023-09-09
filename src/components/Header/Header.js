@@ -4,15 +4,16 @@ import Navigation from '../Navigation/Navigation';
 import './Header.css';
 import logo from '../../images/logo.svg';
 
-const Header = ({ isLoggedIn }) => {
+const Header = ({ loggedIn }) => {
   return (
     <header className='header'>
       <Link to='/'>
         <img className='header__logo' src={logo} alt='Логотип сайта' />
       </Link>
-      <Navigation isLoggedIn={isLoggedIn} />
+      <Navigation loggedIn={loggedIn} />
     </header>
   );
 };
 
 export default Header;
+

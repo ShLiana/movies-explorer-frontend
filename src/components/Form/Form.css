@@ -10,6 +10,13 @@
   outline: none;
 }
 
+.form__error-text {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 12px;
+  color: red;
+}
+
 @media screen and (max-width: 430px) {
   .form {
     width: 260px;
