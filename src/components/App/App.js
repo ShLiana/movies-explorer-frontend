@@ -73,19 +73,6 @@ function App() {
         setLoggedIn(false);
       })
       .finally(() => setIsCheckToken(true));
-
-    mainApi
-      .getSavedMovies(jwt)
-      .then(({ data }) => {
-        setLoggedIn(true);
-        setSavedMovies(data);
-        setFilteredMoviesList(data);
-        setAllMoviesShow(data);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoggedIn(false);
-      });
   };
 
   // Про пользователя - регистрация, авторизация, редактирование данных
@@ -124,14 +111,9 @@ function App() {
           checkToken();
           navigate("/movies"); // переадресация на страницу movies
         }
-        Promise.all([mainApi.getUserInfo(), moviesApi.getAllMovies()]).then(
-          ([userInfo, userMovies]) => {
-            setCurrentUser(userInfo); // данные записываются в глобальную стейт-переменную
-
-            localStorage.setItem("movies", JSON.stringify(userMovies));
-            setAllMovies(JSON.parse(localStorage.getItem("movies")));
-          }
-        );
+        Promise.all([mainApi.getUserInfo()]).then(([userInfo]) => {
+          setCurrentUser(userInfo); // данные записываются в глобальную стейт-переменную
+        });
       })
       .catch((err) => {
         if (err === "Ошибка: 500") {
@@ -200,6 +182,7 @@ function App() {
   function userFilteredMovies(movies, keyword, checkbox) {
     //фильтрация фильмов локально
     const moviesFilterList = searchMoviesList(movies, keyword, false);
+    setIsLoading(true);
     // если фильм не найден, то выходит сообщение об ошибке
     moviesFilterList.length === 0 ? setIsNotFound(true) : setIsNotFound(false);
     //установили стейт setAllFoundMoviesList, в ктр записали отфильтрованные локально фильмы
@@ -214,12 +197,11 @@ function App() {
       "moviesFoundThroughSearchForm",
       JSON.stringify(moviesFilterList)
     );
-    setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 1000);
   }
 
   // Обработка запроса по поиску фильма по ключевому слову
   function userMovieRequest(keyword) {
+    setIsLoading(true);
     // сохраняем набранное ключевое слово
     localStorage.setItem("searchKeyword", keyword);
     // сохраняем положение чекбокса
@@ -229,6 +211,7 @@ function App() {
       moviesApi
         .getAllMovies()
         .then((movies) => {
+          setIsLoading(false);
           // записываем полученные фильмы с Beatfilm
           localStorage.setItem("allMovies", JSON.stringify(movies));
           setAllMovies(movies);
